@@ -21,7 +21,6 @@ from email_validate import validate
 directory_script = os.path.abspath('')
 index_i = 0
 
-HEADLES = True
 USE_DEL_PROXY = False
 ALL_MAILS_PATH = directory_script + '/mails.txt'
 GOOD_MAILS_PATH = directory_script + '/good.txt'
@@ -225,11 +224,9 @@ def main() -> None:
                                             'intl.accept_languages': 'en,en_US'
                                         }
                                         )
-        # headless mode
-        options.headless = HEADLES
 
         driver = webdriver.Chrome(
-            executable_path=directory_script + '/chromedriver',
+            #executable_path=directory_script + '/chromedriver',
             options=options
         )
         # List of blocked image formats
@@ -244,10 +241,7 @@ def main() -> None:
         end_time = time.monotonic()
         text = 'Time download webdriver - {}'.format(timedelta(seconds=end_time - start_time))
         _color_log(text, yellow)
-        if HEADLES:
-            pass
-        else:
-            driver.minimize_window()
+
         # Connect to the site and fill in the data
         for _ in range(10):
             # Read user's files
